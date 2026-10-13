@@ -1,0 +1,6 @@
+{
+  "name": "skedulo-enablement/TempoAgentExamples",
+  "formatVersion": "1",
+  "packageVersion": "0.0.1",
+  "description": "Tempo custom agents, the automations that raise Tempo tasks, and the configuration variable they depend on"
+}
