@@ -143,6 +143,10 @@ To remove it from your tenant:
 sked artifacts custom-agent delete --name dispatch-assistant -a <alias>
 ```
 
+### Starting a new agent
+
+Copy the [template](template/) folder. Its README has the steps and a checklist of the fields to fill in.
+
 ### Deploying everything
 
 The [package](package/) folder deploys all of the examples in one command:
