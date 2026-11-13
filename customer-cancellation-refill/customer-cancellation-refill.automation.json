@@ -67,7 +67,7 @@
           "Resource": "action:resolve-tempo-task",
           "Arguments": {
             "taskId": "{% $createTempoTask.result.data.taskId %}",
-            "resolutionNote": "{% 'Tempo found nothing to move into the freed slot. ' & $runTempoTask.result.data.summary %}"
+            "resolutionNote": "{% $substring('Tempo found nothing to move into the freed slot. ' & $runTempoTask.result.data.summary, 0, 2000) %}"
           },
           "Assign": {
             "resolveTempoTask": "{% $states.result %}"

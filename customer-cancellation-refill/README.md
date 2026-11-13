@@ -12,7 +12,7 @@ Alongside [Sick Leave Cover](../sick-leave-cover/), this shows a second trigger 
 | `CreateTempoTask` | `create-tempo-task` with the job as the `subject` context record and a brief that asks Tempo to find work for the freed slot. |
 | `RunTempoTask` | `run-tempo-task` on the new task. Its output has a `status` of either `awaiting_approval` (Tempo proposed changes and paused) or `completed` (Tempo finished with a summary and no plan). |
 | `DidTempoFinishWithoutAPlan` | A `Choice` step on `$runTempoTask.result.data.status`. |
-| `ResolveTempoTask` | When the status is `completed`: `resolve-tempo-task` with a `resolutionNote` that carries Tempo's summary, so the audit trail says why the task was closed. |
+| `ResolveTempoTask` | When the status is `completed`: `resolve-tempo-task` with a `resolutionNote` that carries Tempo's summary, so the audit trail says why the task was closed. The note is cut to 2,000 characters, the most `resolutionNote` accepts. |
 | `LeaveForApproval` | Otherwise: a `Pass` step. The task stays in the inbox with Tempo's proposed plan, and the scheduler approves or rejects it there. |
 
 The Choice tests for `completed` rather than for `awaiting_approval`, so that anything unexpected leaves the task in the inbox rather than resolving it.
@@ -34,7 +34,7 @@ sked artifacts automation upsert -f customer-cancellation-refill.automation.json
 Pick a scheduled job with a resource allocated, ideally in a region that also has unscheduled or pending work.
 
 1. Open the job, cancel it, and choose **Cancelled by customer** as the reason.
-2. Open the Tempo inbox. If Tempo found work for the slot, the task **Job cancelled: refill the slot for JOB-0001** is there with the plan ready to approve. If it found nothing, the task is already resolved; it shows under resolved tasks with Tempo's summary as the resolution note.
+2. Open the Tempo inbox. If Tempo found work for the slot, the task **Job cancelled: refill the slot for JOB-0001** is there with the plan ready to approve. If it found nothing, the task is already resolved and has moved to **History**, with Tempo's summary as the resolution note.
 
 Three things to try in the task's chat when there is a plan:
 
@@ -44,7 +44,7 @@ Three things to try in the task's chat when there is a plan:
 2. **"Only move jobs that are already overdue."**
    Tempo narrows the plan and shows the revised preview. Nothing has changed yet.
 
-3. **Approve the plan.**
+3. **Click Use this plan.**
    Tempo moves the work into the slot and notifies the resources.
 
 ## Updating the task instead

@@ -33,7 +33,7 @@ We welcome ideas, fixes and new examples! Please see the [CONTRIBUTING](CONTRIBU
   <!-- Sick Leave Cover -->
   <td valign="top">
     <h2><a href="sick-leave-cover/">Sick Leave Cover</a></h2>
-    <img src="images/recommended-plan.png" alt="Tempo's recommended plan for covering a sick worker's job" width="400"/>
+    <img src="images/recommended-plan.png" alt="Tempo's recommended plan for covering a sick worker's job" width="250"/>
     <br/>
     <br/>
     <details>
@@ -56,7 +56,7 @@ We welcome ideas, fixes and new examples! Please see the [CONTRIBUTING](CONTRIBU
     <br/>
     <details>
       <summary><b>ℹ️ More info </b></summary>
-      <p>An automation on a job that a customer cancels. It asks Tempo to fill the freed slot, then branches on the outcome: flag the task for approval when Tempo has a plan, or resolve it when there is nothing to move.</p>
+      <p>An automation on a job that a customer cancels. It asks Tempo to fill the freed slot, then branches on the outcome: leave the task for approval when Tempo has a plan, or resolve it when there is nothing to move.</p>
       <b>Features</b><br/>
       <p>
         <code>Automation</code>, <code>update-tempo-task</code>, <code>resolve-tempo-task</code>, <code>Choice step</code>
@@ -108,11 +108,11 @@ We welcome ideas, fixes and new examples! Please see the [CONTRIBUTING](CONTRIBU
 
 Every example needs:
 
-* A Skedulo Pulse Platform tenant with **Tempo enabled**. See [Enable Tempo in a tenant](https://docs.skedulo.com/developer-guides/tempo/enable-tempo/).
+* A Skedulo tenant with **Tempo enabled**, on the Skedulo Pulse Platform or Skedulo for Salesforce. See [Enable Tempo in a tenant](https://docs.skedulo.com/developer-guides/tempo/enable-tempo/).
 * The [Skedulo CLI](https://docs.skedulo.com/developer-guides/cli/install-the-skedulo-cli/) installed and [authenticated](https://docs.skedulo.com/developer-guides/cli/authenticate-with-the-skedulo-cli/) against that tenant under an alias. The commands below use `<alias>` for it.
 * A user with the **Use AI Agent** permission to try the prompts, and the `skedulo.tenant.ai.agent.admin` permission to deploy custom agents.
 
-The automation examples also need the **automations beta** switched on for your team. See [Create Tempo tasks from automations](https://docs.skedulo.com/developer-guides/tempo/create-tasks-from-automations/#before-you-start).
+The automation examples, and the package that includes them, need a Skedulo Pulse Platform tenant with the **automations beta** switched on for your team. See [Create Tempo tasks from automations](https://docs.skedulo.com/developer-guides/tempo/create-tasks-from-automations/#before-you-start).
 
 If `sked artifacts custom-agent` or `sked artifacts automation` is missing from your CLI, run `sked artifacts update-descriptors` to refresh the list of artifact types.
 
