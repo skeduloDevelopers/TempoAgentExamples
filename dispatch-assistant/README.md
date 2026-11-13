@@ -37,7 +37,7 @@ Use a real job name from your tenant in place of `JOB-0001`. If you accept the a
 
 * `instructions.role` is one sentence. Tempo uses it to decide when a request belongs to this agent, so keep it a description of what the agent is for.
 * `instructions.negativeBoundaries` and the `tools` allowlist say the same thing two ways. The boundary shapes how the agent answers; the allowlist is what the platform enforces.
-* The profile has no `guardrails` key. Approval of every write is managed by the platform and is not something a profile can change.
+* The profile has no `guardrails` key. Whether a write pauses for approval is managed by the platform, and by an administrator in [Tempo's settings](https://docs.skedulo.com/user-guides/tempo/settings-memory-and-feedback/#how-much-tempo-does). It is not something a profile can change.
 
 ## Remove
 

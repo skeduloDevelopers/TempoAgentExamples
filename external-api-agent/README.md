@@ -41,7 +41,7 @@ An `allowedDomains` entry can list the configuration variable keys the agent may
 ]
 ```
 
-A host that carries a secret must be on the platform-curated destination list, or publishing fails with `allowed_domain_not_curated`. The committed agent omits `secrets` so that it deploys as-is. Ask Skedulo to curate your supplier's host, then add the `secrets` entry and redeploy.
+A host that carries a secret must first be approved by Skedulo, or publishing fails with `allowed_domain_not_curated`. The committed agent omits `secrets` so that it deploys as-is. Contact your Skedulo Customer Success Manager with your supplier's host name, then add the `secrets` entry and redeploy.
 
 ## Prompts to try
 

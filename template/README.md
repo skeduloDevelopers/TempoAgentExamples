@@ -20,7 +20,7 @@ Edit the state file:
 - [ ] `instructions.scope`: which records and which time window.
 - [ ] `instructions.guidance`: a few lines on which tools to use, in what order, and how to shape the answer.
 - [ ] `instructions.negativeBoundaries`: only what the agent must refuse. Leave it out if the tool allowlist already covers it.
-- [ ] `tools`: the fewest tools that do the job. The allowlist is what the platform enforces. See [Custom agents](https://docs.skedulo.com/developer-guides/tempo/custom-agents/) for the full list.
+- [ ] `tools`: the fewest tools that do the job. The allowlist is what the platform enforces. See the [Agent tools reference](https://developer.skedulo.com/agent-tools/) for every tool and whether it reads or writes.
 - [ ] `allowedDomains`: only if `tools` includes `external_api`. Put any API key in a `ConfigVariable` artifact, as in [external-api-agent](../external-api-agent/).
 
 Then write the README, replacing this one: the purpose, prerequisites, the deploy command, three prompts to try, and what Tempo should do with each. [dispatch-assistant](../dispatch-assistant/) is a short one to copy.

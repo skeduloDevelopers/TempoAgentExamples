@@ -14,6 +14,8 @@ This is the worked example from [Create Tempo tasks from automations](https://do
 
 The `Assign` block on each step is what makes the output available to later steps under a variable named after the step. The CLI adds it when it retrieves an automation, so the committed file is exactly what `sked artifacts automation get` returns.
 
+If nothing later in the workflow uses the run's output, you can instead set `autoInvestigate` to `true` in the `CreateTempoTask` arguments and leave out `RunTempoTask`. Keep the separate step when the workflow needs the run's status, as [Customer Cancellation Refill](../customer-cancellation-refill/) does.
+
 ## Prerequisites
 
 * Tempo enabled for the tenant, and the automations beta switched on for your team. See [Before you start](https://docs.skedulo.com/developer-guides/tempo/create-tasks-from-automations/#before-you-start).
@@ -26,7 +28,7 @@ The `Assign` block on each step is what makes the output available to later step
 sked artifacts automation upsert -f sick-leave-find-cover.automation.json -a <alias>
 ```
 
-The automation deploys active. Redeploying it later leaves its status as it is, so switching it off in the web app sticks.
+The file sets `status` to `active`, so every deploy activates the automation. Remove `status` from the file if a redeploy should leave an automation that was switched off in the web app as it is.
 
 ## Try it
 
@@ -49,7 +51,7 @@ Three things to try in the task's chat:
 2. **"Is there anyone closer?"**
    Tempo checks the alternatives and either stands by the plan or revises it. Still nothing has changed.
 
-3. **Approve the plan.**
+3. **Click Use this plan.**
    Tempo reallocates the jobs and sends the notifications. The task shows what it did.
 
 ## Adapting the trigger
