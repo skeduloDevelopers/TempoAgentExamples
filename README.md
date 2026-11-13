@@ -98,20 +98,7 @@ We welcome ideas, fixes and new examples! Please see the [CONTRIBUTING](CONTRIBU
       <br/><br/>
     </details>
   </td>
-  <!-- Package -->
-  <td valign="top">
-    <h2><a href="package/">Package</a></h2>
-    <br/>
-    <details open>
-      <summary><b>ℹ️ More info </b></summary>
-      <p>A <code>skeduloPackage.json</code> and <code>src/</code> layout that deploys every example above in one command, with configuration variables, automations, and custom agents in their own folders so that the CLI deploys them in dependency order.</p>
-      <b>Features</b><br/>
-      <p>
-        <code>Package</code>, <code>sked package deploy local</code>, <code>deploy order</code>
-      </p>
-      <br/><br/>
-    </details>
-  </td>
+  <td valign="top"></td>
 </tr>
 </table>
 
