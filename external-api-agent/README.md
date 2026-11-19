@@ -46,7 +46,7 @@ A host that carries a secret must first be approved by Skedulo, or publishing fa
 ## Prompts to try
 
 1. **"Is everything JOB-0001 needs in stock with the supplier?"**
-   The agent reads the job. With the placeholder host it has nothing to look up, so it reports what it found on the job and says it sent nothing to any host. With a real supplier host it proposes the `external_api` call and pauses: every external call, including a read, waits for your approval because it sends data outside Skedulo.
+   The agent reads the job. With the placeholder host it has nothing to look up, so it reports what it found on the job and says it sent nothing to any host. With a real supplier host it proposes the `external_api` call and pauses: in the inbox and the chat, every external call, including a read, waits for your approval because it sends data outside Skedulo. A [direct call](https://docs.skedulo.com/developer-guides/tempo/custom-agents/#call-a-published-agent-directly) does not pause.
 
 2. **"Move JOB-0001 to next Monday."**
    The agent declines. Moving jobs is outside its boundaries, and `move_job_time` is not on its allowlist.
