@@ -4,7 +4,9 @@ A `generalist` agent that answers reporting questions about the schedule, such a
 
 The only data tool on its allowlist is `skedulo_api`, the integrations tool that can call any Skedulo API endpoint as the user. The rest of the allowlist is date arithmetic: `get_current_time`, `get_local_day_window`, and `format_date_time`. The `scope` and `negativeBoundaries` keep the agent to reads: it uses GET requests, and it says so when a question would need the schedule to change.
 
-`skedulo_api` is a write-capable tool, so why is this read-only? Two reasons. GET requests through `skedulo_api` run without asking for approval; a POST, PUT, PATCH, or DELETE pauses for the user to approve it, so the agent cannot change anything quietly. And the instructions tell the agent to reply, not to act, so it does not try. Together they give you a reporting agent that is safe to publish to every scheduler.
+`skedulo_api` is a write-capable tool, so why is this read-only? Two reasons. GET requests through `skedulo_api` run without asking for approval; in the inbox and the chat, a POST, PUT, PATCH, or DELETE pauses for the user to approve it, so the agent cannot change anything quietly. And the instructions tell the agent to reply, not to act, so it does not try. Together they give you a reporting agent that is safe to publish to every scheduler.
+
+A [direct call](https://docs.skedulo.com/developer-guides/tempo/custom-agents/#call-a-published-agent-directly) is different: nothing pauses, so only the instructions keep the agent to reads. That is why a direct call needs the `skedulo.tenant.ai.agent.automation` permission, which using the agent in the inbox or the chat does not.
 
 ## Prerequisites
 

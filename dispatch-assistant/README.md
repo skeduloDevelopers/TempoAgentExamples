@@ -16,7 +16,7 @@ It starts from the `scheduler` persona and narrows it to one job: keeping today'
 sked artifacts custom-agent upsert -f dispatch-assistant.custom-agent.json -a <alias>
 ```
 
-The CLI validates the profile and publishes it in one step. It is live for the whole tenant straight away: Tempo routes matching requests to it in the inbox and the chat, and it can be [called directly](https://docs.skedulo.com/developer-guides/tempo/custom-agents/#call-a-published-agent-directly) by name.
+The CLI validates the profile and publishes it in one step. It is live for the whole tenant straight away: Tempo routes matching requests to it in the inbox and the chat, and it can be [called directly](https://docs.skedulo.com/developer-guides/tempo/custom-agents/#call-a-published-agent-directly) by name. A direct call also needs the `skedulo.tenant.ai.agent.automation` permission.
 
 ## Prompts to try
 
@@ -37,7 +37,7 @@ Use a real job name from your tenant in place of `JOB-0001`. If you accept the a
 
 * `instructions.role` is one sentence. Tempo uses it to decide when a request belongs to this agent, so keep it a description of what the agent is for.
 * `instructions.negativeBoundaries` and the `tools` allowlist say the same thing two ways. The boundary shapes how the agent answers; the allowlist is what the platform enforces.
-* The profile has no `guardrails` key. Whether a write pauses for approval is managed by the platform, and by an administrator in [Tempo's settings](https://docs.skedulo.com/user-guides/tempo/settings-memory-and-feedback/#how-much-tempo-does). It is not something a profile can change.
+* The profile has no `guardrails` key. Whether a write pauses for approval is managed by the platform, and by an administrator in [Tempo's settings](https://docs.skedulo.com/user-guides/tempo/settings-memory-and-feedback/#how-much-tempo-does). It is not something a profile can change. A direct call is the exception: nothing pauses, so `allocate_job` writes as soon as the agent calls it.
 
 ## Remove
 
