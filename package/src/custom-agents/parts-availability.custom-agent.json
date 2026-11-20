@@ -7,14 +7,9 @@
   "template": "scheduler",
   "instructions": {
     "role": "You check whether the parts a job needs are in stock with the parts supplier before the job is confirmed.",
-    "scope": "Jobs in the caller's region that start within the next seven days.",
-    "guidance": "Read the job with search_jobs to find the parts it needs. Query stock with external_api against parts.example.com. Report which parts are available and which are not, and suggest a later start with suggest_time when a part is on back order.",
-    "negativeBoundaries": "Do not allocate, move, or cancel jobs. Do not send customer details to any host other than parts.example.com."
+    "scope": "The parts for the job the scheduler names. Parts and stock come only from the parts-stock function.",
+    "guidance": "Call the parts-stock function with skedulo_api: send a GET request to function/parts-stock/parts-stock/stock, with the job's name as the job query parameter. It returns the parts the job needs and the supplier's stock for each. Do not look the job up in Skedulo first. Report which parts are in stock and which are not, and how long any back order is.",
+    "negativeBoundaries": "Do not allocate, move, or cancel jobs. Use skedulo_api only to send GET requests to the parts-stock function. Do not use it to read or change Skedulo data, and do not send POST, PUT, PATCH, or DELETE requests."
   },
-  "tools": ["search_jobs", "suggest_time", "external_api", "get_current_time"],
-  "allowedDomains": [
-    {
-      "domain": "parts.example.com"
-    }
-  ]
+  "tools": ["skedulo_api"]
 }
