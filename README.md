@@ -82,23 +82,38 @@ We welcome ideas, fixes and new examples! Please see the [CONTRIBUTING](CONTRIBU
   </td>
 </tr>
 <tr>
-  <!-- External API Agent -->
+  <!-- Parts Availability -->
   <td width="50%" valign="top">
-    <h2><a href="external-api-agent/">External API Agent</a></h2>
-    <img src="images/tempo-chat.png" alt="The Tempo chat, where the agent proposes an external API call for approval" width="400"/>
+    <h2><a href="parts-availability/">Parts Availability</a></h2>
+    <img src="images/tempo-chat.png" alt="The Tempo chat, where the agent reports the supplier's stock" width="400"/>
     <br/>
     <br/>
     <details>
       <summary><b>ℹ️ More info </b></summary>
-      <p>An agent that checks a parts supplier through <code>external_api</code>, restricted by <code>allowedDomains</code>, with the <code>ConfigVariable</code> artifact that holds the supplier's API key. Shows the order the two artifacts deploy in.</p>
+      <p>An agent that checks a parts supplier's stock by calling a Skedulo function through <code>skedulo_api</code>. The function is included and returns the same example parts every time, so the example works as soon as it is deployed.</p>
       <b>Features</b><br/>
       <p>
-        <code>Custom agent</code>, <code>external_api</code>, <code>allowedDomains</code>, <code>ConfigVariable</code>
+        <code>Custom agent</code>, <code>Function</code>, <code>skedulo_api</code>, <code>calling a function</code>
       </p>
       <br/><br/>
     </details>
   </td>
-  <td valign="top"></td>
+  <!-- Weather Check -->
+  <td width="50%" valign="top">
+    <h2><a href="weather-check/">Weather Check</a></h2>
+    <img src="images/tempo-chat.png" alt="The Tempo chat, where the agent asks to call a weather API" width="400"/>
+    <br/>
+    <br/>
+    <details>
+      <summary><b>ℹ️ More info </b></summary>
+      <p>An agent that checks the forecast for a job through <code>external_api</code>, restricted by <code>allowedDomains</code> to one open weather API, and proposes moving the job when rain is likely. Both the request and the move wait for approval.</p>
+      <b>Features</b><br/>
+      <p>
+        <code>Custom agent</code>, <code>external_api</code>, <code>allowedDomains</code>, <code>approval</code>
+      </p>
+      <br/><br/>
+    </details>
+  </td>
 </tr>
 </table>
 

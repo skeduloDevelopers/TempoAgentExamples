@@ -6,26 +6,27 @@ A local package that deploys every example in this repository in one command. Th
 package/
 ├── skeduloPackage.json
 └── src/
-    ├── config-variables/
-    │   └── PARTS_SUPPLIER_API_KEY.config-variable.json
+    ├── functions/
+    │   ├── parts-stock.function.json
+    │   └── parts-stock/
     ├── automations/
     │   ├── sick-leave-find-cover.automation.json
     │   └── customer-cancellation-refill.automation.json
     └── custom-agents/
         ├── dispatch-assistant.custom-agent.json
         ├── skedulo-api-assistant.custom-agent.json
-        └── parts-availability.custom-agent.json
+        ├── parts-availability.custom-agent.json
+        └── weather-check.custom-agent.json
 ```
 
 ## Deploy order
 
 A package deploys its artifacts in dependency order, whatever folders they are in. For these artifact types the order is:
 
-1. Configuration variables
-2. Automations
-3. Custom agents, last
+1. Functions and automations
+2. Custom agents, last
 
-So `PARTS_SUPPLIER_API_KEY` exists before `parts-availability` is published, which matters once the agent's `allowedDomains` entry names it in `secrets`. Keeping each type in its own folder is a convention, not a requirement, but it makes the order easy to see.
+So the `parts-stock` function is deployed before `parts-availability`, the agent that calls it, is published. Keeping each type in its own folder is a convention, not a requirement, but it makes the order easy to see.
 
 ## Deploy
 
@@ -45,4 +46,4 @@ Redeploy the same way after changing a file. See [Work with packages](https://do
 
 ## Keeping the copies in sync
 
-When you change an example, copy its state file into the matching `src/` folder here. The CLI reads this folder, not the example folders.
+When you change an example, copy its state file into the matching `src/` folder here. For the function, copy the `parts-stock` folder as well as `parts-stock.function.json`. The CLI reads this folder, not the example folders.
