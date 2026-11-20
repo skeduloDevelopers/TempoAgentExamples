@@ -20,18 +20,18 @@ The CLI validates the profile and publishes it in one step. It is live for the w
 
 ## Prompts to try
 
-Open the Tempo chat and ask:
+Ask these in the Tempo chat. Tempo decides whether to pass a request to this agent or to answer with its own tools, so either may reply.
 
 1. **"Which jobs this week have no one allocated?"**
    Tempo searches the jobs in the window and lists the ones with no active allocation, grouped by region, with their local times. Nothing changes.
 
 2. **"Who could take JOB-0001 on Wednesday? Suggest someone, but do not allocate yet."**
-   The agent reads the job and asks the scheduling engine for candidates. It lists them with travel time and capacity and offers to allocate one. Still nothing changes.
+   Tempo reads the job and asks the scheduling engine for candidates. It lists them with travel time and capacity and offers to allocate one. Still nothing changes.
 
 3. **"Cancel JOB-0001."**
-   The agent declines: cancelling is outside what it is set up to do. It offers what it can do instead, such as allocating or checking the job's status.
+   [Called directly](https://docs.skedulo.com/developer-guides/tempo/custom-agents/#call-a-published-agent-directly), the agent declines: cancelling is outside what it is set up to do. It offers what it can do instead, such as allocating or checking the job's status. In the chat, Tempo may take the request itself and propose the cancellation for your approval.
 
-Use a real job name from your tenant in place of `JOB-0001`. If you accept the allocation in prompt 2, the agent proposes it and pauses; nothing is written to Skedulo until you approve it in the chat.
+Use a real job name from your tenant in place of `JOB-0001`. If you accept the allocation in prompt 2, Tempo proposes it and pauses; nothing is written to Skedulo until you approve it in the chat.
 
 ## What to look at
 
