@@ -22,6 +22,8 @@ sked artifacts custom-agent upsert -f skedulo-api-assistant.custom-agent.json -a
 
 ## Prompts to try
 
+The replies below are the agent's own, which you get when you [call it directly](https://docs.skedulo.com/developer-guides/tempo/custom-agents/#call-a-published-agent-directly). In the Tempo chat, Tempo decides whether to pass a request to this agent or to answer with its own tools, so either may reply.
+
 1. **"How many jobs are unallocated per region this week?"**
    The agent works out the week's boundaries, reads the jobs in that window, and replies with a count per region and a total. It states the time window and the filters it applied, and ends with "I changed nothing".
 
@@ -29,7 +31,7 @@ sked artifacts custom-agent upsert -f skedulo-api-assistant.custom-agent.json -a
    A two-column table of regions and timezones.
 
 3. **"Allocate the unallocated jobs in Paris to whoever is free."**
-   The agent explains that it only reports and does not change the schedule, and offers the counts instead.
+   The agent explains that it only reports and does not change the schedule, and offers the counts instead. In the chat, Tempo may take the request itself and propose the allocations for your approval.
 
 ## What to look at
 

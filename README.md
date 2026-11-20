@@ -110,7 +110,7 @@ Every example needs:
 
 * A Skedulo tenant with **Tempo enabled**, on the Skedulo Pulse Platform or Skedulo for Salesforce. See [Enable Tempo in a tenant](https://docs.skedulo.com/developer-guides/tempo/enable-tempo/).
 * The [Skedulo CLI](https://docs.skedulo.com/developer-guides/cli/install-the-skedulo-cli/) installed and [authenticated](https://docs.skedulo.com/developer-guides/cli/authenticate-with-the-skedulo-cli/) against that tenant under an alias. The commands below use `<alias>` for it.
-* A user with the **Use AI Agent** permission to try the prompts, and the `skedulo.tenant.ai.agent.admin` permission to deploy custom agents.
+* A user with the **Use AI Agent** permission to try the prompts in the chat, the `skedulo.tenant.ai.agent.admin` permission to deploy custom agents, and the `skedulo.tenant.ai.agent.automation` permission to call an agent directly.
 
 The automation examples, and the package that includes them, need a Skedulo Pulse Platform tenant with the **automations beta** switched on for your team. See [Create Tempo tasks from automations](https://docs.skedulo.com/developer-guides/tempo/create-tasks-from-automations/#before-you-start).
 
