@@ -56,7 +56,7 @@ We welcome ideas, fixes and new examples! Please see the [CONTRIBUTING](CONTRIBU
     <br/>
     <details>
       <summary><b>ℹ️ More info </b></summary>
-      <p>An automation on a job that a customer cancels. It asks Tempo to fill the freed slot, then branches on the outcome: leave the task for approval when Tempo has a plan, or resolve it when there is nothing to move.</p>
+      <p>An automation on a job that a customer cancels. It asks Tempo to fill the freed slot, then branches on the outcome: flag the task for approval when Tempo has a plan, or resolve it when there is nothing to move.</p>
       <b>Features</b><br/>
       <p>
         <code>Automation</code>, <code>update-tempo-task</code>, <code>resolve-tempo-task</code>, <code>Choice step</code>

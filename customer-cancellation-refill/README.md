@@ -1,8 +1,8 @@
 # Customer Cancellation Refill
 
-An automation on a job that a customer cancels. It creates a Tempo task with the job attached, asks Tempo to fill the freed slot with pending work, then branches on what Tempo came back with: a plan waiting for approval stays in the inbox, and a run that found nothing to move resolves the task so the inbox stays clean.
+An automation on a job that a customer cancels. It creates a Tempo task with the job attached, asks Tempo to fill the freed slot with pending work, then branches on what Tempo came back with: a task with a plan waiting is retitled and raised to high priority so that it stands out in the inbox, and a run that found nothing to move resolves the task so the inbox stays clean.
 
-Alongside [Sick Leave Cover](../sick-leave-cover/), this shows a second trigger shape (an `Update` that compares `current` with `previous`), a `Choice` step on an action's output, and the `resolve-tempo-task` action. The `update-tempo-task` action is covered [below](#updating-the-task-instead).
+Alongside [Sick Leave Cover](../sick-leave-cover/), this shows a second trigger shape (an `Update` that compares `current` with `previous`), a `Choice` step on an action's output, and the `update-tempo-task` and `resolve-tempo-task` actions.
 
 ## How it works
 
@@ -13,7 +13,7 @@ Alongside [Sick Leave Cover](../sick-leave-cover/), this shows a second trigger 
 | `RunTempoTask` | `run-tempo-task` on the new task. Its output has a `status` of either `awaiting_approval` (Tempo proposed changes and paused) or `completed` (Tempo finished with a summary and no plan). |
 | `DidTempoFinishWithoutAPlan` | A `Choice` step on `$runTempoTask.result.data.status`. |
 | `ResolveTempoTask` | When the status is `completed`: `resolve-tempo-task` with a `resolutionNote` that carries Tempo's summary, so the audit trail says why the task was closed. The note is cut to 2,000 characters, the most `resolutionNote` accepts. |
-| `LeaveForApproval` | Otherwise: a `Pass` step. The task stays in the inbox with Tempo's proposed plan, and the scheduler approves or rejects it there. |
+| `FlagForApproval` | Otherwise: `update-tempo-task`, which retitles the task **Approve the refill plan for JOB-0001** and raises its priority to `high`. Only the arguments you provide change. The task stays in the inbox with Tempo's proposed plan, and the scheduler approves or rejects it there. |
 
 The Choice tests for `completed` rather than for `awaiting_approval`, so that anything unexpected leaves the task in the inbox rather than resolving it.
 
@@ -34,7 +34,7 @@ sked artifacts automation upsert -f customer-cancellation-refill.automation.json
 Pick a scheduled job with a resource allocated, ideally in a region that also has unscheduled or pending work.
 
 1. Open the job, cancel it, and choose **Cancelled by customer** as the reason.
-2. Open the Tempo inbox. If Tempo found work for the slot, the task **Job cancelled: refill the slot for JOB-0001** is there with the plan ready to approve. If it found nothing, the task is already resolved and has moved to **History**, with Tempo's summary as the resolution note.
+2. Open the Tempo inbox. If Tempo found work for the slot, the task **Approve the refill plan for JOB-0001** is there at high priority, with the plan ready to approve. If it found nothing, the task is already resolved and has moved to **History**, with Tempo's summary as the resolution note.
 
 Three things to try in the task's chat when there is a plan:
 
@@ -46,25 +46,6 @@ Three things to try in the task's chat when there is a plan:
 
 3. **Click Use this plan.**
    Tempo moves the work into the slot and notifies the resources.
-
-## Updating the task instead
-
-The `update-tempo-task` action changes a task's title, description, priority, or attached records after it was created. A natural use here is to raise the priority and retitle the task when Tempo has a plan waiting, so that it stands out in the inbox. Replace the `LeaveForApproval` step with:
-
-```json
-"FlagForApproval": {
-  "Type": "Task",
-  "Resource": "action:update-tempo-task",
-  "Arguments": {
-    "taskId": "{% $createTempoTask.result.data.taskId %}",
-    "title": "{% 'Approve the refill plan for ' & $trigger.current.Name %}",
-    "priority": "high"
-  },
-  "End": true
-}
-```
-
-and point the Choice's `Default` at it. The committed file uses the `Pass` step because **Update Tempo Task** is not yet available on every tenant; if the deploy reports `Some fields failed to validate`, your tenant does not have it yet.
 
 ## Adapting the trigger
 

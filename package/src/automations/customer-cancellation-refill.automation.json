@@ -3,7 +3,7 @@
     "type": "Automation"
   },
   "name": "customer-cancellation-refill",
-  "description": "Raise a Tempo task when a customer cancels a job, run Tempo on it, then leave the task for approval when Tempo has a plan or resolve it when there is nothing to move.",
+  "description": "Raise a Tempo task when a customer cancels a job, run Tempo on it, then flag the task for approval when Tempo has a plan or resolve it when there is nothing to move.",
   "status": "active",
   "trigger": {
     "type": "recordModified",
@@ -17,7 +17,7 @@
     }
   },
   "workflow": {
-    "description": "Create a Tempo task with the cancelled job attached, run it, then resolve the task when Tempo found nothing to move or leave it in the inbox for approval.",
+    "description": "Create a Tempo task with the cancelled job attached, run it, then resolve the task when Tempo found nothing to move or retitle it and raise its priority for approval.",
     "definition": {
       "StartAt": "CreateTempoTask",
       "States": {
@@ -60,7 +60,7 @@
               "Next": "ResolveTempoTask"
             }
           ],
-          "Default": "LeaveForApproval"
+          "Default": "FlagForApproval"
         },
         "ResolveTempoTask": {
           "Type": "Task",
@@ -74,9 +74,17 @@
           },
           "End": true
         },
-        "LeaveForApproval": {
-          "Type": "Pass",
-          "Comment": "Tempo paused on a proposed plan. The scheduler approves or rejects it in the inbox.",
+        "FlagForApproval": {
+          "Type": "Task",
+          "Resource": "action:update-tempo-task",
+          "Arguments": {
+            "taskId": "{% $createTempoTask.result.data.taskId %}",
+            "title": "{% 'Approve the refill plan for ' & $trigger.current.Name %}",
+            "priority": "high"
+          },
+          "Assign": {
+            "flagForApproval": "{% $states.result %}"
+          },
           "End": true
         }
       }
