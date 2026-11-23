@@ -25,12 +25,14 @@ sked artifacts custom-agent upsert -f weather-check.custom-agent.json -a <alias>
 * `allowedDomains` names the one host the agent may call, `api.open-meteo.com`. A request to any other host is refused, whatever the instructions say.
 * The `guidance` gives the method, the URL, and the query parameters, so the agent does not have to guess how the API works.
 
-The agent reads the job with `get_job_by_name`, sends the job's latitude and longitude to the forecast endpoint, and reads the chance of rain for each of the next seven days from the response. The `negativeBoundaries` keep everything else about the job inside Skedulo.
+The agent reads the job with `get_job_by_name`, sends the job's latitude and longitude to the forecast endpoint, and reads the chance of rain for today and each of the next seven days from the response. The `negativeBoundaries` keep everything else about the job inside Skedulo.
 
 Things to notice:
 
 * Every `external_api` call waits for your approval in the inbox and the chat, including a read, because it sends data outside Skedulo. The approval card shows the URL and the names of the query parameters.
 * Moving the job is a second approval. The agent proposes `move_job_time` and pauses; nothing changes until you approve it.
+* `move_job_time` takes UTC times, so the agent uses `convert_datetime` to keep the job at the same local time when the clocks change between the two days.
+* If no later day in the forecast is below the threshold, the agent says so and leaves the job where it is.
 * A [direct call](https://docs.skedulo.com/developer-guides/tempo/custom-agents/#call-a-published-agent-directly) pauses for neither, so there the forecast request is sent and the job is moved straight away.
 * 50% is the threshold in the `guidance`. Change the number there to make the agent more or less cautious.
 
