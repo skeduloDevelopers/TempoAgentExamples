@@ -30,6 +30,7 @@ The agent reads the job with `get_job_by_name`, sends the job's latitude, longit
 Things to notice:
 
 * Every `external_api` call waits for your approval in the inbox and the chat, including a read, because it sends data outside Skedulo. The approval card shows the URL and the names of the query parameters.
+* Open-Meteo's free API sometimes does not answer the first request. After about 30 seconds the agent says it is retrying and asks for approval again. Approve it; the retry has gone through each time we have seen this.
 * Moving the job is a second approval. The agent proposes `move_job_time` and pauses; nothing changes until you approve it.
 * `move_job_time` takes UTC times, so the agent uses `convert_datetime` to keep the job at the same local time when the clocks change between the two days.
 * If no later day in the forecast is below the threshold, the agent says so and leaves the job where it is.
