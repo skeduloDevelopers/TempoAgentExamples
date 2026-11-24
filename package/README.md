@@ -16,7 +16,8 @@ package/
         ├── dispatch-assistant.custom-agent.json
         ├── skedulo-api-assistant.custom-agent.json
         ├── parts-availability.custom-agent.json
-        └── weather-check.custom-agent.json
+        ├── weather-check.custom-agent.json
+        └── slot-refill.custom-agent.json
 ```
 
 ## Deploy order

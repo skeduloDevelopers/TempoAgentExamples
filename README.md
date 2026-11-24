@@ -4,6 +4,8 @@ A set of example Tempo custom agents, and automations that raise Tempo tasks, to
 
 Tempo is Skedulo's AI agent for schedulers. It runs as an inbox of tasks in the Skedulo web app, with a chat alongside. A **custom agent** gives Tempo instructions and a tool allowlist specific to your operation. An **automation** can create a Tempo task when something happens in Skedulo, and ask Tempo to start working on it before a scheduler looks. Both are artifacts, so they live in source control and deploy with the CLI. The [Tempo developer guide](https://docs.skedulo.com/developer-guides/tempo/) explains both in full; the examples here show them in use.
 
+Tempo also has **playbooks**: ready-made automations that you turn on in Tempo's settings, with nothing to deploy. Check them before you build an automation; see [Choose between a playbook, an automation, and a custom agent](https://docs.skedulo.com/developer-guides/tempo/#choose-between-a-playbook-an-automation-and-a-custom-agent). [Slot Refill](slot-refill/) pairs a playbook with a custom agent.
+
 > Tempo is in private beta. Features, limits, and setup steps can change between releases. Contact your Skedulo Customer Success Manager to request access.
 
 ## Contributing
@@ -114,6 +116,25 @@ We welcome ideas, fixes and new examples! Please see the [CONTRIBUTING](CONTRIBU
       <br/><br/>
     </details>
   </td>
+</tr>
+<tr>
+  <!-- Slot Refill -->
+  <td width="50%" valign="top">
+    <h2><a href="slot-refill/">Slot Refill</a></h2>
+    <img src="images/cancelled-job-task.png" alt="A cancelled job's Tempo task in the inbox" width="400"/>
+    <br/>
+    <br/>
+    <details>
+      <summary><b>ℹ️ More info </b></summary>
+      <p>A custom agent that works the tasks raised by Tempo's <b>Job cancelled</b> playbook. The playbook decides when a task is raised, and the agent carries your rules for which waiting job may take the freed slot.</p>
+      <b>Features</b><br/>
+      <p>
+        <code>Custom agent</code>, <code>Playbook</code>, <code>delegation from a task</code>
+      </p>
+      <br/><br/>
+    </details>
+  </td>
+  <td valign="top"></td>
 </tr>
 </table>
 
