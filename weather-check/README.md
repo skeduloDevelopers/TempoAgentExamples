@@ -25,7 +25,7 @@ sked artifacts custom-agent upsert -f weather-check.custom-agent.json -a <alias>
 * `allowedDomains` names the one host the agent may call, `api.open-meteo.com`. A request to any other host is refused, whatever the instructions say.
 * The `guidance` gives the method, the URL, and the query parameters, so the agent does not have to guess how the API works.
 
-The agent reads the job with `get_job_by_name`, sends the job's latitude and longitude to the forecast endpoint, and reads the chance of rain for today and each of the next seven days from the response. The `negativeBoundaries` keep everything else about the job inside Skedulo.
+The agent reads the job with `get_job_by_name`, sends the job's latitude, longitude and timezone to the forecast endpoint, and reads the chance of rain for today and each of the next seven days from the response. The `negativeBoundaries` keep everything else about the job inside Skedulo.
 
 Things to notice:
 
