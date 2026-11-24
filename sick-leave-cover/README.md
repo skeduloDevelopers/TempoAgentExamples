@@ -4,6 +4,8 @@ An automation that creates a Tempo task the moment a resource records sick leave
 
 This is the worked example from [Create Tempo tasks from automations](https://docs.skedulo.com/developer-guides/tempo/create-tasks-from-automations/#example-a-worker-records-sick-leave), as a deployable artifact.
 
+No playbook covers a worker recording sick leave, which is why this is an automation. For other events, check Tempo's playbooks before you build one; see [Choose between a playbook, an automation, and a custom agent](https://docs.skedulo.com/developer-guides/tempo/#choose-between-a-playbook-an-automation-and-a-custom-agent).
+
 ## How it works
 
 | Part | What it does |

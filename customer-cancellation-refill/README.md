@@ -4,6 +4,8 @@ An automation on a job that a customer cancels. It creates a Tempo task with the
 
 Alongside [Sick Leave Cover](../sick-leave-cover/), this shows a second trigger shape (an `Update` that compares `current` with `previous`), a `Choice` step on an action's output, and the `update-tempo-task` and `resolve-tempo-task` actions.
 
+Tempo's **Job cancelled** playbook already raises a task for every cancelled job, with nothing to build. Use this automation when you need what the playbook does not have: a filter on the cancellation reason, and steps that act on the result of Tempo's run. [Slot Refill](../slot-refill/) shows the playbook route, and [Choose between a playbook, an automation, and a custom agent](https://docs.skedulo.com/developer-guides/tempo/#choose-between-a-playbook-an-automation-and-a-custom-agent) compares them.
+
 ## How it works
 
 | Step | What it does |
